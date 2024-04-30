@@ -12,47 +12,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.senai.lugaluga.R;
 import com.senai.lugaluga.model.Produto;
+import com.senai.lugaluga.view.adapter.AdapterProduto;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView listCidade;
-
-    private String[] cidades = {
-            "São Carlos", "Araraquara", "Ibaté",
-            "Ribeirão Bonito", "Dourado", "Descalvado",
-            "Porto Ferreira", "Santa Rita do Passa Quatro",
-            "Tambaú", "Pirassununga", "Ribeirão Preto",
-            "Jaboticabal", "Franca", "São Paulo", "Itapiratina",
-            "Brotas", "Jaú", "Bauru", "Rio Claro", "Rio de Janeiro"
-    };
-
+    private RecyclerView recyclerView;
+    private AdapterProduto adapterProduto;
+    private List<Produto> produtoList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        listCidade = findViewById(R.id.listaNomes);
+        recyclerView.findViewById(R.id.listaProdutos);
+    }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                getApplicationContext(),
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                cidades
-        );
+    public void CriarListaProdutos(){
 
-        listCidade.setAdapter(adapter);
+        Produto produto = new Produto("Iphone 13",
+                                    "Iphone 13 64gb",
+                                        200.00,
+                                "Disponível",
+                                    "Muito bom");
 
-        listCidade.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String itemSelecionado = listCidade.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(), itemSelecionado, Toast.LENGTH_LONG).show();
-            }
-        });
+        produtoList.add(produto);
 
     }
+
 }

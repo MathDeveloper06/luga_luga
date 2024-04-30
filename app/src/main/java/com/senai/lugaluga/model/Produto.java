@@ -7,7 +7,6 @@ public class Produto {
     private double preco;
     private String disponibilidade;
     private String avaliacao;
-
     public String getNome() {
         return nome;
     }
