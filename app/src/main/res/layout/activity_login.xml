@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/logoapp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlinedTextField"
+        android:id="@+id/inputEmail"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:hint="@string/hint_email"
@@ -35,7 +35,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/outlinedTextField2"
+        android:id="@+id/inputSenha"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:hint="@string/hint_senha"
@@ -44,7 +44,7 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField">
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -61,7 +61,7 @@
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/outlinedTextField2"
+        app:layout_constraintTop_toBottomOf="@id/inputSenha"
     />
 
     <Button
@@ -71,13 +71,14 @@
         android:text="@string/hint_login"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/azul"
-        app:layout_constraintTop_toBottomOf="@id/outlinedTextField2"
+        app:layout_constraintTop_toBottomOf="@id/inputSenha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
     </Button>
 
     <TextView
+        android:id="@+id/fazerCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hint_new"

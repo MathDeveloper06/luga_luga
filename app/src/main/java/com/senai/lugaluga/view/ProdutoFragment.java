@@ -1,24 +1,19 @@
 package com.senai.lugaluga.view;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.senai.lugaluga.R;
 import com.senai.lugaluga.RecyclerItemClickListener;
@@ -28,45 +23,60 @@ import com.senai.lugaluga.view.adapter.AdapterProduto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link ProdutoFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class ProdutoFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private AdapterProduto adapterProduto;
     private List<Produto> produtoList = new ArrayList<>();
 
+    public ProdutoFragment() {
+        // Required empty public constructor
+    }
+
+    public static ProdutoFragment newInstance(String param1, String param2) {
+        ProdutoFragment fragment = new ProdutoFragment();
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+    }
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.minha_toolbar);
-        setSupportActionBar(myToolbar);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        recyclerView = findViewById(R.id.listaProdutos);
+        View view = inflater.inflate(R.layout.fragment_produto, container, false);
+
+        recyclerView = view.findViewById(R.id.listaProdutos);
 
         CriarListaProdutos();
 
         adapterProduto = new AdapterProduto(produtoList);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapterProduto);
 
         recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(MainActivity.this, ProdutoActivity.class);
+                        Intent intent = new Intent(getContext(), ProdutoActivity.class);
                         intent.putExtra("produto", produtoList.get(position));
                         startActivity(intent);
                     }
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        Toast.makeText(getApplicationContext(), produtoList.get(position).getDisponibilidade(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), produtoList.get(position).getDisponibilidade(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -74,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 }));
+
+        return view;
     }
 
     public void CriarListaProdutos(){
