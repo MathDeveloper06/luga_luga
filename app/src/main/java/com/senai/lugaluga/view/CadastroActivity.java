@@ -24,7 +24,9 @@ import java.util.regex.Pattern;
 public class CadastroActivity extends AppCompatActivity {
 
     private Spinner spinnerUf;
-    private TextInputLayout inputEmail, input_cpf, input_cep, input_data;
+    private TextInputLayout inputEmail, input_cpf, input_cep, input_data, input_nome, input_cidade,
+            input_logradouro, input_numero, input_complemento,
+            input_bairro, input_email, input_senha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
